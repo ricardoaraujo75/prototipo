@@ -1,0 +1,16 @@
+- name: Start Lab PYTHON PRODERJ
+  hosts: localhost
+
+  tasks:
+
+    # - name: Start/Restart Pods CadUnico Integration
+    #   containers.podman.podman_play:
+    #     kube_file: "./pod-cadunico-integration.yml"
+    #     state: "started"
+    #     recreate: true
+
+    - name: Start/Restart Pods PROTOTIPO
+      containers.podman.podman_play:
+        kube_file: "../labpython.yml"
+        state: "started"
+        recreate: true

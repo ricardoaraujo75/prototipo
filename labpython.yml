@@ -1,0 +1,237 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: "labpython"
+data:
+  TERM: xterm-256color
+  # ============================== Postgres14 env ==============================
+
+  POSTGRES_PASSWORD: "postgres"
+  PGPORT: "5432"
+
+  # =============================== PGAdmin4 env ===============================
+  PGADMIN_DEFAULT_EMAIL: "jose.s.maciel@outlook.com"
+  PGADMIN_DEFAULT_PASSWORD: "proderj@2023"
+  PGADMIN_LISTEN_ADDRESS: "0.0.0.0"
+  PGADMIN_LISTEN_PORT: "80"
+  # PGADMIN_CONFIG_SERVER_MODE: 'False'
+  # If left unset, a Postfix server will be started to deliver password
+  # reset emails.
+  PGADMIN_DISABLE_POSTFIX: "1"
+  # =============================== FLASKAPP ===================================
+
+  FLASKAPP_BASEPATH: "/form-reutilizavel"
+  LABPYTHON_SECRET_KEY: "do7XLxKRcDSGKZJgBFRGrfo1Uw0CYigo"
+  #=================================================================================================
+  # SSO HML
+  #=================================================================================================
+  # FLASKAPP_RHSSO_SIS_BASE_URL: "sistemas.idp.homol.proderj.rj.gov.br"
+  # FLASKAPP_RHSSO_SIS_CLIENTID: "lab-proderj"
+  # FLASKAPP_RHSSO_SIS_SECRET: "mOlRtmpfk9SJC1gHGI9nrIcykDxqrrqQ"
+  #=================================================================================================
+  # SSO PRD
+  #=================================================================================================
+  FLASKAPP_RHSSO_SIS_BASE_URL: "sistemas.idp.dev.proderj.rj.gov.br"
+  FLASKAPP_RHSSO_SIS_CLIENTID: "lab-proderj"
+  # FLASKAPP_RHSSO_SIS_SECRET: "v1UPM1kNujc4zubyZNICs4G05UgzzEtc"
+  FLASKAPP_RHSSO_SIS_SECRET: "AqAQTAP1gjUyYSmube8s6wyNl8m4pKxF"
+  # FLASKAPP_RHSSO_SIS_CLIENTID: "pmerj-portal"
+  # FLASKAPP_RHSSO_SIS_SECRET: "MgeRRwi3wU8MpWnpUJHSZw6pZKpV04iH"
+  # FLASKAPP_RHSSO_SIS_REDIRECT_URI: "http://localhost:8080"
+  FLASKAPP_RHSSO_SIS_REDIRECT_URI: "http://localhost:5000/login"
+  FLASKAPP_RHSSO_SIS_REDIRECT_LOGOUT: "http://localhost:5000"
+  FLASKAPP_DATABASE_URL: 'postgresql://postgres:postgres@labpython-db:5432/labpython_db'
+
+  #=================================================================================================
+  # ASSELETRONICA HML
+  #=================================================================================================
+  ASSELETRONICA_BASE_URI: "http://localhost:5000/"
+  ASSELETRONICA_REDIRECT_URI: "http://localhost:5000/assinar"
+  ASSELETRONICA_CLIENTID: "sisproderjhomol"
+  ASSELETRONICA_SECRET: "ronhabIURFVEBYLEXMIW"
+  ASSELETRONICA_SERVIDOROAUTH: "cas.staging.iti.br/oauth2.0"
+  ASSELETRONICA_SERVIDORNUVEMQUALIFICADA: "assinatura-api.staging.iti.br/externo/v2"
+
+  #=================================================================================================
+  # ASSELETRONICA PRD
+  #=================================================================================================
+  # ASSELETRONICA_BASE_URI: "http://localhost:5000/"
+  # ASSELETRONICA_REDIRECT_URI: "http://localhost:5000/assinar"
+  # ASSELETRONICA_CLIENTID: "sisproderjhomol"
+  # ASSELETRONICA_SECRET: "ronhabIURFVEBYLEXMIW"
+  # ASSELETRONICA_SERVIDOROAUTH: "cas.iti.br/oauth2.0"
+  # ASSELETRONICA_SERVIDORNUVEMQUALIFICADA: "assinatura-api.iti.br/externo/v2"
+  # ================================== sonarqube ===============================
+
+  SONAR_JDBC_URL: "jdbc:postgresql://labpython-db:5432/sonar"
+  SONAR_JDBC_USERNAME: "postgres"
+  SONAR_JDBC_PASSWORD: "postgres"
+# =============================== LABPYTHON312-UBI9 ============================
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: labpython312-ubi9
+  labels:
+    app: labpython312-ubi9
+spec:
+  volumes:
+  - name: sourcecode
+    hostPath:
+      # path: /home/jmaciel/Documentos/EDS/labpython-service/form-reutilizavel-old
+      # path: /home/jmaciel/Documentos/EDS/labpython-service/form-reutilizavel
+      # path: /home/jmaciel/Documentos/EDS/labpython-service/my_streamlit_app
+      path: /home/jmaciel/Documentos/EDS/labpython-proderj/closed/prototipo-assinatura-eletronica
+      type: Directory
+  containers:
+    - name: labpython312-ubi9
+      image: localhost/python-podman:latest
+      envFrom:
+        - configMapRef:
+            name: labpython
+      ports:
+      - name: devmode
+        containerPort: 5000
+        hostPort: 5000
+      - name: hmlprdmode
+        containerPort: 8080
+        hostPort: 8080
+      resources:
+        limits:
+          cpu: 600m
+          memory: "512Mi"
+        requests:
+          cpu: 300m
+          memory: "128Mi"
+      volumeMounts:
+        - name: sourcecode
+          mountPath: /opt/app-root/src
+      # command: ["streamlit", "hello", "--server.port", "5000"] # -> my_streamlit_app
+      command: ["python3", "-m" , "flask", "--debug", "run", "--host=0.0.0.0"] # -> my_flask_app, prototipo-assinatura-eletronica
+      # python3 -m flask --debug run --host=0.0.0.0
+      # command: [ 'sh', '-c', 'sleep infinity' ] # -> my_flask_app, prototipo-assinatura-eletronica
+      # command:
+      #   # -> waitress-serve --host 0.0.0.0 --port 5000 app:app
+      #   - "waitress-serve"
+      #   - "--host"
+      #   - "0.0.0.0"
+      #   - "--port"
+      #   - "8080"
+      #   - "app:app"
+      securityContext:
+        runAsUser: 1001
+# # ================================ postgresdb14 ================================
+# ---
+# kind: Pod
+# apiVersion: v1
+# metadata:
+#   name: labpython-db
+#   labels:
+#     app: labpython-db
+# spec:
+#   volumes:
+#   - name: dbsource
+#     hostPath:
+#       path: /home/jmaciel/Documentos/EDS/labpython-service/db/pg14data
+#       type: Directory
+#   containers:
+#     - name: labpython-db
+#       envFrom:
+#         - configMapRef:
+#             name: labpython
+#       image: docker.io/postgres:14.5-bullseye
+#       imagePullPolicy: IfNotPresent
+#       ports:
+#       - containerPort: 5432
+#         hostPort: 5433
+#       resources:
+#         limits:
+#           cpu: 600m
+#           memory: "512Mi"
+#         requests:
+#           cpu: 300m
+#           memory: "128Mi"
+#       volumeMounts:
+#         - name: dbsource
+#           mountPath: /var/lib/postgresql/data
+# # ================================== pgadmin4 ==================================
+# ---
+# kind: Pod
+# apiVersion: v1
+# metadata:
+#   name: labpython-pgadmin
+#   labels:
+#     app: labpython-pgadmin
+# spec:
+#   volumes:
+#   - name: pgadminsource
+#     hostPath:
+#       path: /home/jmaciel/Documentos/EDS/labpython-service/db/pgadmin4
+#       type: Directory
+#   containers:
+#     - name: labpython-pgadmin
+#       envFrom:
+#         - configMapRef:
+#             name: labpython
+#       image: docker.io/dpage/pgadmin4:latest
+#       imagePullPolicy: IfNotPresent
+#       ports:
+#       - containerPort: 80
+#         hostPort: 9090
+#       resources:
+#         limits:
+#           cpu: 600m
+#           memory: "512Mi"
+#         requests:
+#           cpu: 300m
+#           memory: "128Mi"
+#       volumeMounts:
+#         - name: pgadminsource
+#           mountPath: /var/lib/pgadmin
+# # ================================== sonarqube =================================
+# ---
+# kind: Pod
+# apiVersion: v1
+# metadata:
+#   name: labpython-sonarqube
+#   labels:
+#     app: labpython-sonarqube
+# spec:
+#   volumes:
+#   - name: sonarqubedata
+#     hostPath:
+#       path: /home/jmaciel/Documentos/EDS/labpython-service/sonarqube/data
+#       type: Directory
+#   - name: sonarqubelogs
+#     hostPath:
+#       path: /home/jmaciel/Documentos/EDS/labpython-service/sonarqube/logs
+#       type: Directory
+#   - name: sonarqubeextensions
+#     hostPath:
+#       path: /home/jmaciel/Documentos/EDS/labpython-service/sonarqube/extensions
+#       type: Directory
+#   containers:
+#     - name: labpython-sonarqube
+#       envFrom:
+#         - configMapRef:
+#             name: labpython
+#       image: docker.io/library/sonarqube:lts-developer
+#       imagePullPolicy: IfNotPresent
+#       ports:
+#       - containerPort: 9000
+#         hostPort: 9000
+#       resources:
+#         limits:
+#           cpu: 1000m
+#           memory: "1Gi"
+#         requests:
+#           cpu: 300m
+#           memory: "128Mi"
+#       volumeMounts:
+#         - name: sonarqubedata
+#           mountPath: /opt/sonarqube/data
+#         - name: sonarqubelogs
+#           mountPath: /opt/sonarqube/logs
+#         - name: sonarqubeextensions
+          # mountPath: /opt/sonarqube/extensions

@@ -1,0 +1,14 @@
+- name: STOP Lab PYTHON PRODERJ
+  hosts: localhost
+
+  tasks:
+
+    # - name: STOP Pods CadUnico Integration
+    #   containers.podman.podman_play:
+    #     kube_file: "./pod-cadunico-integration.yml"
+    #     state: absent
+
+    - name: STOP Pods PROTOTIPO
+      containers.podman.podman_play:
+        kube_file: "../labpython.yml"
+        state: "absent"
