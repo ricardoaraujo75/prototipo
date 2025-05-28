@@ -1,0 +1,145 @@
+{% extends "layout/common.html" %}
+
+<!-- home.tera -->
+{% block title %}LABPRODERJ | INÍCIO{% endblock title %}
+
+{% block content %}
+<div class="portal-busca">
+    <div class="portal56 portal282 portal2741">
+        <h3 class="portal-busca-titulo">O que você procura?</h3>
+        <form
+            style="max-width: 720px; border-radius: 4px; width: 100%; justify-content: center; align-items: center; margin: 0px 20px; background-color: rgba(255, 255, 255, 0.85);">
+            <div class="portal2732 row align-items-center">
+                <div class="portal56 portal283 portal2733 col-1 px-4">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24"
+                        class="portal-search-icon" height="1em" width="1em"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M19.023 16.977a35.13 35.13 0 0 1-1.367-1.384c-.372-.378-.596-.653-.596-.653l-2.8-1.337A6.962 6.962 0 0 0 16 9c0-3.859-3.14-7-7-7S2 5.141 2 9s3.14 7 7 7c1.763 0 3.37-.66 4.603-1.739l1.337 2.8s.275.224.653.596c.387.363.896.854 1.384 1.367l1.358 1.392.604.646 2.121-2.121-.646-.604c-.379-.372-.885-.866-1.391-1.36zM9 14c-2.757 0-5-2.243-5-5s2.243-5 5-5 5 2.243 5 5-2.243 5-5 5z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="col-7">
+                    <input class="portal-search-input" placeholder="Exemplo: IPVA, Portal do Servidor.."
+                        value="">
+                </div>
+                <div class="col-2">
+                    <button class="portal-search-btn" tabindex="0" type="submit">
+                        <span class="portal77">
+                            <p class="portal87 portal2738 portal89">Buscar</p>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="portal56 portal2207 portal2743 m-4">
+    <div class="portal56 portal2208">
+        <div class="portal56 portal2209 portal2756">
+            <h5 class="portal87 portal2752 portal96">Serviços em destaque</h5>
+        </div>
+        <div class="row">
+            <div class="col portal-card-header m-4">
+                <img class="portal-card-icon" width="68px" height="64px"
+                    src="{{ url_for('static', filename='img/educacao.svg') }}" alt="icon_servico">
+                <div class="portal56 portal2211 portal2754 portal-card-body p-4">
+                    <div style="text-align: center; width: 100%;">
+                        <a class="portal-card-link"
+                            href="/cidadao/servicos/educacao-e-pesquisa/categoria/9">Educação e Pesquisa</a>
+                    </div>
+                    <a class="portal-card-link" href="/servico/acessar-boletim-online190">&gt; Acessar
+                        Boletim Online</a>
+                </div>
+            </div>
+            <div class="col portal-card-header m-4">
+                <img class="portal-card-icon" width="68px" height="64px"
+                    src="{{ url_for('static', filename='img/veiculo.svg') }}" alt="icon_servico">
+                <div class="portal56 portal2212 portal2754 portal-card-body p-4">
+                    <div style="text-align: center; width: 100%;">
+                        <a class="portal-card-link"
+                            href="/cidadao/servicos/veiculos-e-condutores/categoria/23">Veículos e
+                            Condutores</a>
+                    </div>
+                    <a class="portal-card-link" href="/servico/acessar-ipva-grd134">&gt; Acessar IPVA /
+                        GRD</a>
+                </div>
+            </div>
+            <div class="col portal-card-header m-4">
+                <img class="portal-card-icon" width="68px" height="64px"
+                    src="{{ url_for('static', filename='img/seguranca.svg') }}" alt="icon_servico">
+                <div class="portal-card-body p-4">
+                    <div style="text-align: center; width: 100%;">
+                        <a class="portal-card-link"
+                            href="/cidadao/servicos/seguranca-publica/categoria/19">Segurança Pública</a>
+                    </div>
+                    <a class="portal-card-link" href="/servico/fazer-registro-online-de-crime72">&gt; Fazer
+                        registro online de crime</a>
+                    <a class="portal-card-link"
+                        href="/servico/fazer-o-boletim-de-registro-de-acidente-de-transito-sem-vitimas-e-brat159">&gt;
+                        Fazer o Boletim de Registro de Acidente de Trânsito sem Vítimas (e-Brat)</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col portal-card-header m-4">
+                <img class="portal-card-icon" width="68px" height="64px"
+                    src="{{ url_for('static', filename='img/cidadania.svg') }}" alt="icon_servico">
+                <div class="portal-card-body p-4">
+                    <div style="text-align: center; width: 100%;"><a class="portal-card-link"
+                            href="/cidadao/servicos/cidadania-e-direitos/categoria/4">Cidadania e
+                            Direitos</a></div><a class="portal-card-link"
+                        href="/servico/reclamar-no-procon-online3">&gt; Reclamar no Procon online</a><a
+                        class="portal-card-link" href="/servico/cadastrar-usuario-externo-sei-rj30">&gt;
+                        Cadastrar
+                        usuário externo SEI-RJ</a><a class="portal-card-link"
+                        href="/servico/comunicar-violencia-domestica-contra-a-mulher86">&gt; Comunicar
+                        Violência Doméstica contra a Mulher</a>
+                </div>
+            </div>
+            <div class="col portal-card-header m-4">
+                <img class="portal-card-icon" width="68px" height="64px"
+                    src="{{ url_for('static', filename='img/cidadania.svg') }}" alt="icon_servico">
+                <div class="portal-card-body p-4">
+                    <div style="text-align: center; width: 100%;"><a class="portal-card-link"
+                            href="/cidadao/servicos/gestao-de-pessoas/categoria/47">Gestão de Pessoas</a>
+                    </div><a class="portal-card-link"
+                        href="/servico/acessar-sispatri-declaracao-patrimonial-2023169">&gt; Acessar
+                        SISPATRI - Declaração Patrimonial 2024</a>
+                </div>
+            </div>
+            <div class="col portal-card-header m-4">
+                <img class="portal-card-icon" width="68px" height="64px" src="{{ url_for('static', filename='img/agua.svg') }}"
+                    alt="icon_servico">
+                <div class="portal56 portal2216 portal2754 portal-card-body p-4">
+                    <div style="text-align: center; width: 100%;"><a class="portal-card-link"
+                            href="/cidadao/servicos/agua-luz-e-saneamento/categoria/2">Água, Luz e
+                            Saneamento</a></div><a class="portal-card-link"
+                        href="/servico/verificacao-metrologica-em-medidor-relogio-de-energia-eletrica133">&gt;
+                        Verificar medidor (relógio) de energia elétrica - IPEM</a>
+                </div>
+            </div>
+        </div>
+        <!-- if usuario logado -->
+        <div class="row">
+            {% if session['id_token'] %}
+            <div class="col-4 portal-card-header m-4">
+                <img class="portal-card-icon" width="68px" height="64px"
+                    src="{{ url_for('static', filename='img/empresa.svg') }}" alt="icon_servico">
+                <div class="portal-card-body p-4">
+                    <div style="text-align: center; width: 100%;">
+                        <a class="portal-card-link"
+                            href="/cidadao/servicos/cidadania-e-direitos/categoria/4">
+                            Empresas
+                        </a>
+                    </div>
+                    <a class="portal-card-link"
+                        href="{{ url_for('web.business') }}">&gt; Abertura de Empresas
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

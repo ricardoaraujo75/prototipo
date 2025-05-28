@@ -1,0 +1,301 @@
+{% extends "layout/base.html" %}
+
+{% block header %}
+<header class="p-3 text-white cabecalho">
+    <!--menu_superior-->
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="menu-superior container col-8">
+            <div class="menusupi">
+                <div class="infosup">
+                    <ul class="row">
+                        <li class="col-3 align-self-center text-center">
+                            <a href="http://www.cge.rj.gov.br/unidades-setorial-de-ouvidoria-uos/">Rede Ouvidoria e
+                                Transparência</a>
+                        </li>
+                        <li class="col align-self-center text-center">
+                            <a href="http://www.cge.rj.gov.br/sobre-a-oge/">Sobre a OGE</a>
+                        </li>
+                        <li class="col align-self-center text-center">
+                            <a href="https://painel.saude.rj.gov.br/monitoramento/covid19.html">Coronavírus</a>
+                        </li>
+                        <li class="col-2 align-self-center text-center">
+                            <a href="http://www.governoaberto.rj.gov.br/">Portal da Transparência</a>
+                        </li>
+                        <li class="col align-self-center text-center">
+                            <a href="http://www.cge.rj.gov.br/publicacoes/">Guias e Manuais</a>
+                        </li>
+                        <li class="acessibilidade-dropdown col align-self-center text-center">
+                            <a class="acessibilidade-dropbtn">Acessibilidade</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        <!--cabecalho-->
+        <div class="row">
+            <div id="hambtn" class=" hambtn col-1">
+                <a onclick="openNav()">☰</a>
+            </div>
+            <div class="logoproderj-redes-wrap col">
+                <div class="row">
+                    <div class="nome-secretaria col">
+                        <span class="nome-secretaria-conteudo">
+                            LABORATÓRIO PRODERJ
+                        </span>
+                    </div>
+
+                    <div class="logo-rjgov col">
+                        <a href="http://rj.gov.br/" class="link-logo">
+                            <img class="logo-rjgov-img" src="{{ url_for('static', filename='img/logo-gov-header.png') }}">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- /cabecalho-->
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col"></div>
+                    <div id="atl-player" class="radiotopo col-6">
+                        <div class="row">
+                            <div class="overplayer col-3 align-self-center text-center">
+                                <span id="play-icon-radio" style="color: white; font-size: 14px;">
+                                    <img class="iconplay" src="{{ url_for('static', filename='img/img-play.png') }}" alt="play">
+                                </span>
+                                <span id="pause-icon-radio" style="color: white; font-size: 14px; display: none">
+                                    <img class="iconpause" src="{{ url_for('static', filename='img/img-pause.png') }}" alt="pause">
+                                </span>
+                                <audio id="player_html5" style=" color: #fff; width: 359px; height: 100%;">
+                                    <source src="https://radio.saopaulo01.com.br/8300/stream/">
+                                    Seu navegador não suporta HTML5
+                                </audio>
+                            </div>
+                            <div id="atl-player" class="atl-player col  bg-radio align-self-center text-center">
+                                <h2>OUÇA A RÁDIO ROQUETTE-PINTO</h2>
+                                <h3>94FM</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-midia-sup col-4">
+                        <ul class="row">
+                            <li title="Instagram" class="icons-li col">
+                                <a class="icons instagram-sup" href="https://instagram.com/govrj"
+                                    target="_blank">Instagram</a>
+                            </li>
+                            <li title="Facebook" class="icons-li col">
+                                <a class="icons facebook-sup" href="https://facebook.com/governodorio"
+                                    target="_blank">Facebook</a>
+                            </li>
+                            <li title="Twitter" class="icons-li col">
+                                <a class="icons twitter-sup" href="https://twitter.com/GovRJ"
+                                    target="_blank">Twitter</a>
+                            </li>
+                            <li title="Youtube" class="icons-li col">
+                                <a class="icons youtube-sup" href="https://youtube.com/user/GovRJ"
+                                    target="_blank">Youtube</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="social-midia-sup social-midia-proderj col-4"></div>
+                    <div class="social-midia-sup social-midia-proderj col-8">
+                        <div style="float:left;">
+                            <form action="/ouverj/resultados" method="get" id="views-exposed-form-busca-page-1"
+                                accept-charset="UTF-8" style="text-align:left">
+                                <div class="form--inline clearfix row">
+                                    <div
+                                        class="col js-form-item form-item js-form-type-textfield form-type-textfield js-form-item-busca form-item-busca form-no-label">
+                                        <input data-drupal-selector="edit-busca" type="text" id="edit-busca"
+                                            name="busca" value="" size="30" maxlength="128" class="form-text">
+
+                                    </div>
+                                    <input data-drupal-selector="edit-submit-busca" type="submit"
+                                        id="edit-submit-busca" value="Buscar"
+                                        class="col button js-form-submit form-submit">
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col">
+                <div class="portal-menu">
+                    <img class="portal3313" width="32px" height="32px"
+                        src="{{ url_for('static', filename='img/governo.svg') }}" alt="Governo">
+                        <span>Governo</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="portal-menu">
+                    <img class="portal3319" width="8px" height="24px"
+                        src="{{ url_for('static', filename='img/cidadao.svg') }}" alt="Cidadão">
+                        <span>Cidadão</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="portal-menu">
+                    <img class="portal3325" width="24px" height="24px"
+                        src="{{ url_for('static', filename='img/servidor.svg') }}" alt="Servidor">
+                        <span>Servidor</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="portal-menu">
+                    <img class="portal3331" width="24px" height="24px"
+                        src="{{ url_for('static', filename='img/empresa.svg') }}" alt="Empresa">
+                        <span>Empresa</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="portal-menu">
+                    <img class="portal3337" width="24px" height="24px"
+                        src="{{ url_for('static', filename='img/gestao.svg') }}" alt="Gestão pública">
+                        <span>Gestão pública</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="portal-menu">
+                    <img class="portal3343" width="24px" height="24px"
+                        src="{{ url_for('static', filename='img/imprensa.svg') }}" alt="Imprensa">
+                        <span>Imprensa</span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="portal-menu">
+                    <img class="portal3349" width="18px" height="18px"
+                        src="{{ url_for('static', filename='img/atendimento.svg') }}" alt="Atendimento">
+                        <span>Atendimento</span>
+                </div>
+            </div>
+            <div class="col portal56 portal228">
+                {% if not 'id_token' in session or not session['id_token'] %}
+                <form action="{{ url_for('web.login') }}" method="post">
+                    <button class="portal-btn" tabindex="0" type="submit">
+                        <div class="row">
+                            <div class="col-1">
+                                <svg stroke="currentColor" fill="currentColor"
+                                    stroke-width="0" viewBox="0 0 496 512" class="portal-login-icon"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="col-4">
+                                <span class="portal-login-txt">ENTRAR</span>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+                {% else %}
+                <div class="row align-items-center">
+                    <div class="col-4">
+                        <svg class="portal-logged-icon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z">
+                            </path>
+                        </svg>
+                    </div>
+                    {% if session['username'] and session['uid'] %}
+                    <div class="col-7">
+                        <span class="portal-logged-txt">{{ session['username'] }}</span>
+                        <span class="portal-logged-txt">{{ session['uid'] }}</span>
+                    </div>
+                    {% else %}
+                    <div class="col-7">
+                        <span class="portal-logged-txt">Meu Nome</span>
+                        <span class="portal-logged-txt">100.150.087-38</span>
+                    </div>
+                    {% endif %}
+                </div>
+                <form action="{{ url_for('web.logout') }}" method="post">
+                    <button class="portal-btn" tabindex="0" type="submit">
+                        <div class="row">
+                            <div class="col-4">
+                                <span class="portal-login-txt">LOGOUT</span>
+                            </div>
+                        </div>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+</header>
+{% endblock header %}
+
+{% block footer %}
+<footer class="footer container-fluid">
+    <div class="row justify-content-md-center">
+        <div class="col-2">
+            <div class="socia-media-footer container-fluid text-center">
+                <div class="row justify-content-md-center">
+                    <h4>Redes Sociais</h4>
+                </div>
+                <div class="social-midia-sup row" style="padding-left: 20px;">
+                    <ul class="row justify-content-md-center">
+                        <li title="Instagram" class="icons-li col-2">
+                            <a class="icons instagram-sup" href="#" target="_blank">Instagram</a>
+                        </li>
+                        <li title="Facebook" class="icons-li col-2">
+                            <a class="icons facebook-sup" href="#" target="_blank">Facebook</a>
+                        </li>
+                        <li title="Linkedin" class="icons-li col-2">
+                            <a class="icons linkedin-sup" href="#" target="_blank">Twitter</a>
+                        </li>
+                        <li title="Youtube" class="icons-li col-2">
+                            <a class="icons youtube-sup" href="#" target="_blank">Youtube</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col"></div>
+                <div class="views-col col-3">
+                    <div>
+                        <p class="field-content fs-5 text-center">Nosso Endereço</p>
+                    </div>
+                    <div>
+                        <p class="field-content text-center">Rua da Conceição, 69, 24º e 25º andares</p>
+                        <p class="field-content text-center">Centro - Rio de Janeiro</p>
+                    </div>
+                </div>
+                <div class="views-col col-3">
+                    <div>
+                        <p class="field-content fs-5 text-center">Horário de Atendimento</p>
+                    </div>
+                    <div>
+                        <p class="field-content text-center">Segunda à Sexta, das 9h às
+                            18h
+                        </p>
+                    </div>
+                </div>
+                <div class="views-col col-3">
+                    <div>
+                        <p class="field-content fs-5 text-center">Telefones e Email</p>
+                    </div>
+                    <div>
+                        <p class="field-content text-center">(21) 2333-0193</p>
+                        <p class="field-content text-center">labproderj@proderj.rj.gov.br</p>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+        <div class="logo2 col-2 logo-proderj-fixo">
+            <a href="https://www.proderj.rj.gov.br/" target="_blank">
+                <!-- <div class="logo-proderj-fixo">&nbsp;</div> -->
+            </a>
+        </div>
+    </div>
+</footer>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock footer %}

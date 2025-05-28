@@ -1,0 +1,27 @@
+@startuml prototipo-assinatura-eletronica
+
+cloud "Openshift HML/PRD" as OCP {
+    component "SSO Proderj Sistemas" as RHSSO{
+
+    }
+}
+
+cloud "Gov.br" as GOVBR {
+    component "API Assinatura avançada gov.br" as APIAA{
+
+    }
+    component "Login Unico" as LOGINUNICO{
+
+    }
+}
+
+rectangle "Ambiente Local" as LOCALHOST{
+    component "Prototipo Assinatura Eletronica" as PAE{
+
+    }
+}
+
+PAE <--> RHSSO
+PAE <--> APIAA
+RHSSO <--> LOGINUNICO
+@endtuml

@@ -1,0 +1,130 @@
+{% extends "layout/common.html" %}
+
+<!-- home.tera -->
+{% block title %}LABPRODERJ | SERVIÇOS EMPRESAS{% endblock title %}
+
+{% block content %}
+<div class="container-fluid p-4">
+    <h2>Processo de abertura de empresa XXXXX-2024</h2>
+    {% if not session['level'] %}
+        <div class="alert alert-warning m-4" role="alert">
+            <p>A sua conta Gov.br não tem o nível necessário. Veja as intruções abaixo:</p>
+            <p>Para a assinatura do documento é necessário uma conta Gov.br nível Prata ou Ouro.</p>
+            <p>CPF com situação cancelada, nula ou falecido na Receita Federal não permite uso da assinatura eletrônica digital.</p>
+            <p>
+                Para saber mais acesse:
+                <a class="alert-link" rel="stylesheet" href="https://www.gov.br/governodigital/pt-br/identidade/conta-gov-br/niveis-da-conta-govbr" target="_blank">
+                    Saiba mais sobre os níveis da conta gov.br
+                </a>
+            </p>
+            <p>
+                Para mudar o nível da sua conta acesse:
+                <a class="alert-link" rel="stylesheet" href="https://sso.staging.acesso.gov.br/" target="_blank">
+                    níveis da conta gov.br
+                </a>
+            </p>
+        </div>
+    {% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                <div class="alert alert-success m-4" role="alert">
+                    <p>{{ message }}</p>
+                </div>
+                {% elif category == 'error' %}
+                <div class="alert alert-danger m-4" role="alert">
+                    <p>{{ message }}</p>
+                </div>
+                {% else %}
+                <div class="alert alert-secondary m-4" role="alert">
+                    <p>{{ message }}</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="card m-4">
+        <div class="card-header bg-radio text-white">
+            Itens do Processo pendentes
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">item do pendente</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if not session['doc_signed'] %}
+                    <tr>
+                        <th scope='row'>1</th>
+                        <td>Enviar e assinar contrato social.</td>
+                        <td>
+                            {% if not session['level'] %}
+                            <span class="badge bg-warning text-dark">É necessária uma conta nível Prata ou Ouro para esta ação</span>
+                            {% else %}
+                            <form action="{{ url_for('web.proccess') }}">
+                                <input type='submit' class='btn bg-radio text-white' value='assinatura' name='submit'/>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <th scope='row'>1</th>
+                        <td>Conclusão do Processo</td>
+                        <td>
+                            <span class='badge bg-warning text-dark'>Aguardar conclusão do proccesso</span>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card m-4">
+        <div class="card-header bg-radio text-white">
+            Itens do Processo
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">item</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Envio dos Dado(s) do Sócio(s).</td>
+                        <td>
+                            <span class="badge bg-success">concluído</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Anexar Documentos do(s) Sócio(s).</td>
+                        <td>
+                            <span class="badge bg-warning text-dark">Em Análise</span>
+                        </td>
+                    </tr>
+                    {% if session['doc_signed'] %}
+                    <tr>
+                        <th scope='row'>3</th>
+                        <td>Enviar e assinar contrato social.</td>
+                        <td>
+                            <span class='badge bg-warning text-dark'>Em Análise</span>
+                        </td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
